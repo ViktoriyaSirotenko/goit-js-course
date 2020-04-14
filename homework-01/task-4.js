@@ -11,7 +11,8 @@ if (totalPrice > credits) {
 } else if (userChoice === null) {
   message = "Отменено пользователем";
 } else if (totalPrice <= credits) {
-  message =
-    "Вы купили ${userChoice} дроидов, на счету осталось ${(credits-totalPrice)} кредитов";
+  message = `Вы купили ${userChoice} дроидов, на счету осталось ${
+    credits - totalPrice
+  } кредитов`;
 }
 console.log(message);
