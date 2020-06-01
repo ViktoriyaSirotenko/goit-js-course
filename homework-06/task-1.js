@@ -123,6 +123,9 @@ const getSortedUniqueSkills = (users) => {
 
 console.log(getSortedUniqueSkills(users));
 
+// OR
+// .filter((elem, index, array) => array.indexOf(elem) === index) вариант, который предложил Геннадий
+
 // [ 'adipisicing', 'amet', 'anim', 'commodo', 'culpa', 'elit',
 // 'ex', 'ipsum', 'irure',
 // 'laborum', 'lorem', 'mollit', 'non', 'nostrud', 'nulla',
