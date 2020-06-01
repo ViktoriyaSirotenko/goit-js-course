@@ -24,6 +24,12 @@ class StringBuilder {
     this.value += str;
     this.value = str + this.value;
   }
+
+  // OR
+  // pad(str) {
+  //   this.append(str);
+  //   this.prepend(str);
+  // }
 }
 
 const builder = new StringBuilder(".");

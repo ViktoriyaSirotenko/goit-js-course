@@ -64,9 +64,23 @@ class Car {
    * при условии что результирующая скорость
    * не больше чем значение свойства maxSpeed
    */
+
+  // Водитель пошел на обгон, выехал на встречную полосу, педаль в пол - value больше чем
+  // this.speed + value реакция атомобиля - скорость не именилась вообще
+  // Водитель резко тормозит, пытаясь уйти от лобового столкновения - тормоза тоже не реагируют , т.к.
+  // this.speed - value меньше нуля
+  // Mожно ли спасти водителя?
+
+  //   Решение
+  // } else {
+  //   this.speed = this.maxSpeed;
+  // }
+
   accelerate(value) {
     if (this.speed + value < this.maxSpeed) {
       this.speed += value;
+    } else {
+      this.speed = this.maxSpeed;
     }
   }
 
@@ -77,6 +91,8 @@ class Car {
   decelerate(value) {
     if (this.speed - value > 0) {
       this.speed -= value;
+    } else {
+      this.speed = 0;
     }
   }
 
