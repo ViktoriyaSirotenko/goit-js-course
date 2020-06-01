@@ -118,7 +118,7 @@ const getSortedUniqueSkills = (users) => {
     return allSkills;
   };
 
-  return new setSkills(users.reduce(allSkills, []).sort()); //вернуть новый набор умений в виде объекта, отсортированные из общего списка по алфавиту
+  return new Set(users.reduce(allSkills, []).sort()); //вернуть новый набор умений в виде объекта, отсортированные из общего списка по алфавиту
 };
 
 console.log(getSortedUniqueSkills(users));
