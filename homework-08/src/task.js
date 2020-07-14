@@ -1,30 +1,42 @@
 "use strict";
-
 import galleryItems from "./gallery-items.js";
 
-import Element from "./task-class.js";
+const jsGallery = document.querySelector(".js-gallery");
 
-const jsGalery = document.querySelector(".js-gallery");
+// building the list
 
-jsGalery.append(
+jsGallery.append(
   ...galleryItems.map((item) => {
-    return new Element(item).createElement();
+    const link = document.createElement("a");
+    link.href = item.original;
+    link.classList.add("gallery__link");
+
+    const listItem = document.createElement("li");
+    listItem.classList.add("gallery__item");
+
+    const image = document.createElement("img");
+    image.src = item.preview;
+    image.dataset.source = item.original;
+    image.alt = item.description;
+    image.classList.add("gallery__image");
+
+    return listItem.appendChild(link.appendChild(image));
   })
 );
 
-// -----------------------------------------
-const openModal = function (e) {
+// modal logic
+
+const lightboxDiv = document.querySelector("div.lightbox");
+
+const openModal = (e) => {
   lightboxDiv.classList.add("is-open");
   lightboxImage.src = e.target.dataset.source;
   e.preventDefault();
 };
 
-jsGalery.addEventListener("click", openModal);
-// -----------------------------------------
+jsGallery.addEventListener("click", openModal);
 
 const lightboxImage = document.querySelector("img.lightbox__image");
-
-const lightboxDiv = document.querySelector("div.lightbox");
 
 const closeButton = document.querySelector(
   'button[data-action="close-lightbox"]'
@@ -32,12 +44,16 @@ const closeButton = document.querySelector(
 
 const lightboxOverlay = document.querySelector("div.lightbox__content");
 
+// close modal logic
+
 const closeModal = function (e) {
   lightboxDiv.classList.remove("is-open");
   lightboxImage.src = "";
 };
 
 closeButton.addEventListener("click", closeModal);
+
+// next/previous image switching logic
 
 const changeImage = function (currentImage, keyCode) {
   const allImages = galleryItems.map((item) => item.original);
@@ -57,7 +73,9 @@ const changeImage = function (currentImage, keyCode) {
   }
 };
 
-const doAnythin = function (e) {
+// react to keypresses
+
+const reactToKeypresses = function (e) {
   if (lightboxDiv.classList.contains("is-open")) {
     if (e.code === "Escape") {
       closeModal();
@@ -69,7 +87,7 @@ const doAnythin = function (e) {
   }
 };
 
-document.addEventListener("keydown", doAnythin.bind(galleryItems));
+document.addEventListener("keydown", reactToKeypresses.bind(galleryItems));
 
 const overlayClick = function (e) {
   if (e.target === e.currentTarget) {
